@@ -18,14 +18,16 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class SimpleJob {
 
-    @Bean
-    public Job simpleJob(JobRepository jobRepository, Step simpleStep1) {
-        return new JobBuilder("simpleJob", jobRepository)
+    @Bean(name = "simpleJob1")
+    public Job simpleJob1(JobRepository jobRepository, Step simpleStep1) {
+        log.info(">>> simpleStep1");
+        return new JobBuilder("simpleJob1", jobRepository)
                 .start(simpleStep1)
                 .build();
     }
-    @Bean
-    public Step simpleStep(JobRepository jobRepository, Tasklet testTasklet, PlatformTransactionManager platformTransactionManager){
+    @Bean("simpleStep1")
+    public Step simpleStep1(JobRepository jobRepository, Tasklet testTasklet, PlatformTransactionManager platformTransactionManager){
+        log.info(">>> simpleStep1");
         return new StepBuilder("simpleStep1", jobRepository)
                 .tasklet(testTasklet, platformTransactionManager).build();
     }
