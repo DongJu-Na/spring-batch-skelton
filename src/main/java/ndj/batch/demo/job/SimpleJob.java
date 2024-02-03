@@ -20,7 +20,7 @@ public class SimpleJob {
 
     @Bean(name = "simpleJob1")
     public Job simpleJob1(JobRepository jobRepository, Step simpleStep1) {
-        log.info(">>> simpleStep1");
+        log.info(">>> simpleJob1");
         return new JobBuilder("simpleJob1", jobRepository)
                 .start(simpleStep1)
                 .build();
@@ -34,7 +34,7 @@ public class SimpleJob {
     @Bean
     public Tasklet testTasklet(){
         return ((contribution, chunkContext) -> {
-            log.info(">>>>> This is Step1");
+            log.info(">>>>> Tasklet");
             return RepeatStatus.FINISHED;
         });
     }
